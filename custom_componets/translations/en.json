@@ -1,0 +1,38 @@
+{
+    "config": {
+        "step": {
+            "user": {
+                "title": "Configure Open Harbor",
+                "description": "Select the maritime ports you want to monitor.",
+                "data": {
+                    "port_ids": "Ports",
+                    "scan_interval": "Update interval (minutes)"
+                }
+            }
+        },
+        "error": {
+            "cannot_connect": "Could not connect to the data repository. Check your internet connection.",
+            "unknown": "Unexpected error. Check the logs for details.",
+            "no_ports_selected": "You must select at least one port."
+        },
+        "abort": {
+            "already_configured": "This port is already configured."
+        }
+    },
+    "options": {
+        "step": {
+            "init": {
+                "title": "Open Harbor options",
+                "data": {
+                    "port_ids": "Ports",
+                    "scan_interval": "Update interval (minutes)"
+                }
+            }
+        },
+        "error": {
+            "cannot_connect": "Could not connect to the data repository.",
+            "unknown": "Unexpected error. Check the logs for details.",
+            "no_ports_selected": "You must select at least one port."
+        }
+    }
+}

@@ -1,0 +1,38 @@
+{
+    "config": {
+        "step": {
+            "user": {
+                "title": "Configurar Open Harbor",
+                "description": "Selecciona los puertos marítimos que quieres monitorizar.",
+                "data": {
+                    "port_ids": "Puertos",
+                    "scan_interval": "Intervalo de actualización (minutos)"
+                }
+            }
+        },
+        "error": {
+            "cannot_connect": "No se pudo conectar al repositorio de datos. Comprueba tu conexión a internet.",
+            "unknown": "Error inesperado. Consulta los logs para más detalles.",
+            "no_ports_selected": "Debes seleccionar al menos un puerto."
+        },
+        "abort": {
+            "already_configured": "Este puerto ya está configurado."
+        }
+    },
+    "options": {
+        "step": {
+            "init": {
+                "title": "Opciones de Open Harbor",
+                "data": {
+                    "port_ids": "Puertos",
+                    "scan_interval": "Intervalo de actualización (minutos)"
+                }
+            }
+        },
+        "error": {
+            "cannot_connect": "No se pudo conectar al repositorio de datos.",
+            "unknown": "Error inesperado. Consulta los logs para más detalles.",
+            "no_ports_selected": "Debes seleccionar al menos un puerto."
+        }
+    }
+}

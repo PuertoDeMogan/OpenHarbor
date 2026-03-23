@@ -1,0 +1,19 @@
+{
+    "domain": "open_harbor",
+    "name": "Open Harbor",
+    "version": "0.0.1",
+    "config_flow": true,
+    "integration_type": "service",
+    "iot_class": "cloud_polling",
+    "documentation": "https://github.com/PuertoDeMogan/open-harbor",
+    "issue_tracker": "https://github.com/PuertoDeMogan/open-harbor/issues",
+    "codeowners": [
+        "@PuertoDeMogan",
+        "@saizj"
+    ],
+    "requirements": [],
+    "dependencies": [],
+    "after_dependencies": [
+        "http"
+    ]
+}
