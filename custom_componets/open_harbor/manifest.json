@@ -5,8 +5,8 @@
     "config_flow": true,
     "integration_type": "service",
     "iot_class": "cloud_polling",
-    "documentation": "https://github.com/PuertoDeMogan/open-harbor",
-    "issue_tracker": "https://github.com/PuertoDeMogan/open-harbor/issues",
+    "documentation": "https://github.com/PuertoDeMogan/openharbor",
+    "issue_tracker": "https://github.com/PuertoDeMogan/openharbor/issues",
     "codeowners": [
         "@PuertoDeMogan",
         "@saizj"
