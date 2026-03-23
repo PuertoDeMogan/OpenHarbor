@@ -26,6 +26,9 @@
                 "data": {
                     "port_ids": "Puertos",
                     "scan_interval": "Intervalo de actualización (minutos)"
+                },
+                "data_description": {
+                    "scan_interval": "Introduce un valor entre 5 y 1440 minutos."
                 }
             }
         },
