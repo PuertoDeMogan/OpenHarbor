@@ -3,5 +3,6 @@
     "description": "Monitor maritime port data in Home Assistant",
     "iot_class": "cloud_polling",
     "homeassistant": "2024.1.0",
-    "render_readme": true
+    "render_readme": true,
+    "country": "ES"
 }
