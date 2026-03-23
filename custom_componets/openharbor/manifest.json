@@ -1,5 +1,5 @@
 {
-    "domain": "open_harbor",
+    "domain": "openharbor",
     "name": "Open Harbor",
     "version": "0.0.1",
     "config_flow": true,

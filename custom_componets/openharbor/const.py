@@ -1,4 +1,4 @@
-DOMAIN = "open_harbor"
+DOMAIN = "openharbor"
 
 DATA_REPO_OWNER = "PuertoDeMogan"
 DATA_REPO_NAME = "OpenHarbor_Data"
