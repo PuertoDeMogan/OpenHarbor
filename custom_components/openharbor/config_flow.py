@@ -1,4 +1,3 @@
-"""Config flow for Open Harbor integration."""
 from __future__ import annotations
 
 import asyncio
@@ -35,16 +34,7 @@ from .const import (
 _LOGGER = logging.getLogger(__name__)
 
 
-# ---------------------------------------------------------------------------
-# Helpers
-# ---------------------------------------------------------------------------
-
 async def _fetch_available_ports(session: aiohttp.ClientSession) -> dict[str, str]:
-    """
-    1. Lista archivos de ports/ via GitHub API.
-    2. Fetch paralelo de cada JSON para obtener el 'name' real.
-    Devuelve {port_id: name}.
-    """
     headers = {"Accept": "application/vnd.github+json"}
 
     async with session.get(
@@ -70,7 +60,7 @@ async def _fetch_available_ports(session: aiohttp.ClientSession) -> dict[str, st
                 r.raise_for_status()
                 data = await r.json(content_type=None)
                 name = data.get("name", port_id.replace("_", " ").title())
-        except Exception:  # noqa: BLE001
+        except Exception:
             _LOGGER.warning("Could not fetch name for port %s, using fallback", port_id)
             name = port_id.replace("_", " ").title()
         return port_id, name
@@ -84,7 +74,6 @@ def _build_schema(
     default_ports: list[str] | None = None,
     default_interval: int = DEFAULT_SCAN_INTERVAL,
 ) -> vol.Schema:
-    """Schema compartido por ConfigFlow y OptionsFlow."""
     return vol.Schema(
         {
             vol.Required(CONF_PORT_IDS, default=default_ports or []): SelectSelector(
@@ -110,13 +99,7 @@ def _build_schema(
     )
 
 
-# ---------------------------------------------------------------------------
-# Config Flow
-# ---------------------------------------------------------------------------
-
 class OpenHarborConfigFlow(ConfigFlow, domain=DOMAIN):
-    """Handle the config flow for Open Harbor."""
-
     VERSION = 1
 
     def __init__(self) -> None:
@@ -125,7 +108,6 @@ class OpenHarborConfigFlow(ConfigFlow, domain=DOMAIN):
     async def async_step_user(
         self, user_input: dict[str, Any] | None = None
     ) -> FlowResult:
-        """Paso único: selección de puertos e intervalo."""
         errors: dict[str, str] = {}
 
         if not self._available_ports:
@@ -136,7 +118,7 @@ class OpenHarborConfigFlow(ConfigFlow, domain=DOMAIN):
                 errors["base"] = "cannot_connect"
             except aiohttp.ClientError:
                 errors["base"] = "cannot_connect"
-            except Exception:  # noqa: BLE001
+            except Exception:
                 _LOGGER.exception("Unexpected error fetching port list")
                 errors["base"] = "unknown"
 
@@ -146,7 +128,6 @@ class OpenHarborConfigFlow(ConfigFlow, domain=DOMAIN):
             if not selected_ids:
                 errors[CONF_PORT_IDS] = "no_ports_selected"
             else:
-                # unique_id solo si es un puerto único, evita duplicados
                 if len(selected_ids) == 1:
                     await self.async_set_unique_id(selected_ids[0])
                     self._abort_if_unique_id_configured()
@@ -177,13 +158,7 @@ class OpenHarborConfigFlow(ConfigFlow, domain=DOMAIN):
         return OpenHarborOptionsFlow(config_entry)
 
 
-# ---------------------------------------------------------------------------
-# Options Flow
-# ---------------------------------------------------------------------------
-
 class OpenHarborOptionsFlow(OptionsFlow):
-    """Permite reconfigurar puertos e intervalo después del setup."""
-
     def __init__(self, config_entry: ConfigEntry) -> None:
         self._config_entry = config_entry
         self._available_ports: dict[str, str] = {}
@@ -199,7 +174,7 @@ class OpenHarborOptionsFlow(OptionsFlow):
                 self._available_ports = await _fetch_available_ports(session)
             except aiohttp.ClientError:
                 errors["base"] = "cannot_connect"
-            except Exception:  # noqa: BLE001
+            except Exception:
                 _LOGGER.exception("Unexpected error fetching port list")
                 errors["base"] = "unknown"
 
@@ -215,7 +190,6 @@ class OpenHarborOptionsFlow(OptionsFlow):
                     },
                 )
 
-        # Valores actuales como defaults (options tiene prioridad sobre data)
         current = {**self._config_entry.data, **self._config_entry.options}
 
         return self.async_show_form(

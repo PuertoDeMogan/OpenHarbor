@@ -1,4 +1,3 @@
-"""DataUpdateCoordinator for Open Harbor."""
 from __future__ import annotations
 
 import logging
@@ -17,8 +16,6 @@ _LOGGER = logging.getLogger(__name__)
 
 
 class OpenHarborCoordinator(DataUpdateCoordinator[dict[str, Any]]):
-    """Fetches and caches data for a single port."""
-
     def __init__(self, hass: HomeAssistant, port_id: str, scan_interval: int) -> None:
         self.port_id = port_id
         self._url = f"{DATA_REPO_BASE_URL}/{port_id}.json"
@@ -31,7 +28,6 @@ class OpenHarborCoordinator(DataUpdateCoordinator[dict[str, Any]]):
         )
 
     async def _async_update_data(self) -> dict[str, Any]:
-        """Fetch port JSON from open-harbor-data."""
         session = async_get_clientsession(self.hass)
         try:
             async with session.get(

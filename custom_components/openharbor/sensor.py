@@ -1,4 +1,3 @@
-"""Sensor platform for Open Harbor."""
 from __future__ import annotations
 from typing import Any
 
@@ -24,11 +23,11 @@ async def async_setup_entry(
         known_keys: set[str] = set()
 
         def _add_new_sensors(_coordinator=coordinator, _port_id=port_id) -> None:
-            new_entities = [
-                OpenHarborSensor(_coordinator, _port_id, key, meta)
-                for key, meta in _coordinator.data.get("sensors", {}).items()
-                if key not in known_keys and not known_keys.add(key)  # add() returns None → siempre True
-            ]
+            new_entities = []
+            for key, meta in _coordinator.data.get("sensors", {}).items():
+                if key not in known_keys:
+                    known_keys.add(key)
+                    new_entities.append(OpenHarborSensor(_coordinator, _port_id, key, meta))
             if new_entities:
                 async_add_entities(new_entities)
 
@@ -38,7 +37,6 @@ async def async_setup_entry(
 
 class OpenHarborSensor(CoordinatorEntity[OpenHarborCoordinator], SensorEntity):
     _attr_has_entity_name = True
-    # ← elimina _attr_state_class = SensorStateClass.MEASUREMENT de aquí
 
     def __init__(
         self,
@@ -56,7 +54,6 @@ class OpenHarborSensor(CoordinatorEntity[OpenHarborCoordinator], SensorEntity):
         raw_unit = sensor_meta.get("unit")
         self._attr_native_unit_of_measurement = None if raw_unit == "ud" else raw_unit
 
-        # ← dinámico según el valor inicial del JSON
         value = sensor_meta.get("value")
         self._attr_state_class = (
             SensorStateClass.MEASUREMENT if isinstance(value, (int, float)) else None
@@ -85,7 +82,6 @@ class OpenHarborSensor(CoordinatorEntity[OpenHarborCoordinator], SensorEntity):
             ATTR_WRITABLE: sensor.get("writable", False),
             ATTR_SUBMISSION_ENDPOINT: self.coordinator.data.get("submission_endpoint"),
         }
-        # Guardar metadatos extra para Phase 2 si existen
         for key in ("type", "options", "min", "max"):
             if key in sensor:
                 attrs[key] = sensor[key]
