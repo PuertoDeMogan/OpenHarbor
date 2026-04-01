@@ -1,7 +1,7 @@
 {
     "domain": "openharbor",
     "name": "Open Harbor",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "config_flow": true,
     "integration_type": "service",
     "iot_class": "cloud_polling",
