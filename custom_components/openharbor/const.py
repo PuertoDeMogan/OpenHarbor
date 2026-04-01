@@ -19,4 +19,3 @@ CONF_PORT_IDS = "port_ids"
 CONF_SCAN_INTERVAL = "scan_interval"
 
 ATTR_WRITABLE = "writable"
-ATTR_SUBMISSION_ENDPOINT = "submission_endpoint"

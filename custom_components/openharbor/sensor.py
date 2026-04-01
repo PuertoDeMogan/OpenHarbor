@@ -8,7 +8,7 @@ from homeassistant.helpers.entity import DeviceInfo
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
-from .const import ATTR_SUBMISSION_ENDPOINT, ATTR_WRITABLE, DOMAIN
+from .const import ATTR_WRITABLE, DOMAIN
 from .coordinator import OpenHarborCoordinator
 
 
@@ -80,7 +80,6 @@ class OpenHarborSensor(CoordinatorEntity[OpenHarborCoordinator], SensorEntity):
         sensor = self.coordinator.data.get("sensors", {}).get(self._sensor_key, {})
         attrs = {
             ATTR_WRITABLE: sensor.get("writable", False),
-            ATTR_SUBMISSION_ENDPOINT: self.coordinator.data.get("submission_endpoint"),
         }
         for key in ("type", "options", "min", "max"):
             if key in sensor:
