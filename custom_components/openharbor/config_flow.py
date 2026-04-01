@@ -128,9 +128,8 @@ class OpenHarborConfigFlow(ConfigFlow, domain=DOMAIN):
             if not selected_ids:
                 errors[CONF_PORT_IDS] = "no_ports_selected"
             else:
-                if len(selected_ids) == 1:
-                    await self.async_set_unique_id(selected_ids[0])
-                    self._abort_if_unique_id_configured()
+                await self.async_set_unique_id("_".join(sorted(selected_ids)))
+                self._abort_if_unique_id_configured()
 
                 return self.async_create_entry(
                     title=self._build_title(selected_ids),
@@ -150,7 +149,7 @@ class OpenHarborConfigFlow(ConfigFlow, domain=DOMAIN):
         names = [self._available_ports.get(pid, pid) for pid in port_ids]
         if len(names) == 1:
             return names[0]
-        return f"{names[0]} +{len(names) - 1} más"
+        return f"{names[0]} +{len(names) - 1}"
 
     @staticmethod
     @callback
