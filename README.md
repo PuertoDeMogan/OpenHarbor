@@ -80,16 +80,17 @@ Los sensores se crean **dinámicamente** según los datos disponibles de cada pu
 
 Sensores habituales:
 
-| Sensor | Ejemplo | Unidad |
-|---|---|---|
-| Air Temperature | 22,3 | °C |
-| Water Temperature | 19,5 | °C |
-| Wind Speed | 14,2 | km/h |
-| Wind Direction | 210 | ° |
-| Wave Height | 0,8 | m |
-| Humidity | 68 | % |
-| Berths Available | 12 | — |
-| Port Status | open | — |
+| Sensor | Descripción | Ejemplo | Unidad |
+|---|---|---|---|
+| Air Temperature | Sensor de Temperatura del Aire | 22,3 | °C |
+| Water Temperature | Temperatura del Agua | 19,5 | °C |
+| Wind Speed |  Velocidad el Aire | 14,2 | km/h |
+| Wind Direction | Dirección del Viento | 210 | ° |
+| Wave Height | Altura de las Olas | 0,8 | m |
+| Humidity | Humedad del Ambiente | 68 | % |
+| Berths Available | Amarres disponibles en el Puerto | 12 | — |
+| Port Status | Estado actual del Puerto | open | — |
+| Cámara | Imagen en Directo del Puerto | Imagen  | — |
 
 > Los sensores nuevos que se añadan a los datos de un puerto aparecerán automáticamente en el siguiente ciclo de actualización — sin necesidad de reiniciar HA.
 
